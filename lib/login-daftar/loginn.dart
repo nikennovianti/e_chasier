@@ -40,104 +40,105 @@ class _WellcomePageState extends State<WellcomePage> {
       // height: size.height,
       // width: double.infinity,
       home: Scaffold(
-        body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          
-          Positioned(
-            top: 50,
-            right: 0,
-            child: Image.asset("assets/images/ellipse1.png")
-          ),
-          Positioned(
-            top: 268,
-            left: 0,
-            child: Image.asset("assets/images/login-daftar-ellipse2.png")
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Image.asset("assets/images/login-daftar-ellipse3.png")
-          ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Image.asset("assets/images/login-daftar.png"),
-                  SizedBox(height: 20),
-                  Text("E-Chasier", style: heading36White),
-                  SizedBox(height: 5),
-                  Text("Halo, Selamat Datang", style: heading24Secondary),
-                  SizedBox(height: 20),
+          body: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Positioned(
+                  top: 50,
+                  right: 0,
+                  child: Image.asset("assets/images/ellipse1.png")
+                ),
+                Positioned(
+                  top: 268,
+                  left: 0,
+                  child: Image.asset("assets/images/login-daftar-ellipse2.png")
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Image.asset("assets/images/login-daftar-ellipse3.png")
+                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView(
+                      children: [Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Image.asset("assets/images/login-daftar.png"),
+                          SizedBox(height: 20),
+                          Text("E-Chasier", style: heading36White),
+                          SizedBox(height: 5),
+                          Text("Halo, Selamat Datang", style: heading24Secondary),
+                          SizedBox(height: 20),
+                          
+                          //Login
+                          SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width /3,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context, 
+                                  builder: (context) => const login()
+                                );
+                              
+                              }, 
+                              child: Text(
+                                "Login",
+                                style: heading14SecondaryBold,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: buttonColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11),
+                                  side: BorderSide(
+                                    width: 1, color: secondaryColor)
+                                )
+                              )
+                            )
+                          ),
+                                      
+                                      
+                          SizedBox(height: 12),
+                                      
+                          //Daftar
+                          SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width /3,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context, 
+                                  builder: (context) => daftar()
+                                  );
+                              }, 
+                              child: Text(
+                                "Register",
+                                style: heading14SecondaryBold,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: buttonColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11),
+                                  side: BorderSide(
+                                    width: 1, color: secondaryColor)
+                                )
+                              )
+                            )
+                          ),
+                        ],
+                      ),]
+                    ),
+                  ),
                   
-                  //Login
-                  SizedBox(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width /3,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context, 
-                          builder: (context) => const login()
-                        );
-                      
-                      }, 
-                      child: Text(
-                        "Login",
-                        style: heading14SecondaryBold,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: buttonColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          side: BorderSide(
-                            width: 1, color: secondaryColor)
-                        )
-                      )
-                    )
-                  ),
-
-
-                  SizedBox(height: 12),
-
-                  //Daftar
-                  SizedBox(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width /3,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context, 
-                          builder: (context) => daftar()
-                          );
-                      }, 
-                      child: Text(
-                        "Register",
-                        style: heading14SecondaryBold,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: buttonColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(11),
-                          side: BorderSide(
-                            width: 1, color: secondaryColor)
-                        )
-                      )
-                    )
-                  ),
-                ],
+                
+              ],
               ),
-            ),
-            
-          
-        ],
-        ),
-      ),
-      
+          ),
+        
     );
   }
 }
@@ -152,6 +153,7 @@ class login extends StatefulWidget {
 
 class _loginState extends State<login> {
   bool _isHiddenPassword = true;
+  bool _isRadioSelected = false;
   @override
   Widget build(BuildContext context) {
     return  Wrap(
@@ -310,7 +312,48 @@ class _loginState extends State<login> {
   }
 }
 
+class LabeledRadio extends StatelessWidget {
+  const LabeledRadio({
+    Key? key,
+    required this.label,
+    required this.padding,
+    required this.groupValue,
+    required this.value,
+    required this.onChanged,
+  }) : super(key: key);
 
+  final String label;
+  final EdgeInsets padding;
+  final bool groupValue;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (value != groupValue) {
+          onChanged(value);
+        }
+      },
+      child: Padding(
+        padding: padding,
+        child: Row(
+          children: <Widget>[
+            Radio<bool>(
+              groupValue: groupValue,
+              value: value,
+              onChanged: (bool? newValue) {
+                onChanged(newValue!);
+              },
+            ),
+            Text(label, style: heading14White,)
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class daftar extends StatefulWidget {
   // const daftar({ Key? key }) : super(key: key);
@@ -323,6 +366,7 @@ class _daftarState extends State<daftar> {
   bool _isHiddenPassword = true;
   bool _isHiddenKonfirmasiPassword = true;
   bool _isChecked = false;
+  bool _isRadioSelected = false;
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -350,8 +394,6 @@ class _daftarState extends State<daftar> {
                       Iconify(AntDesign.line_outline, color: whiteColor,),
                       SizedBox(height: 24),
                       Text("REGISTER", style: heading24White),
-                      SizedBox(height: 12),
-                      Text("Daftar Sebagai Mitra", style: heading16White),
                       SizedBox(height: 24),
                       
                       Card(
@@ -482,6 +524,34 @@ class _daftarState extends State<daftar> {
                           ),
                       ),
                       SizedBox(height: 6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Daftar Sebagai: "),
+                          LabeledRadio(
+                            label: 'User',
+                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                            value: true,
+                            groupValue: _isRadioSelected,
+                            onChanged: (bool newValue) {
+                              setState(() {
+                                _isRadioSelected = newValue;
+                              });
+                            },
+                          ),
+                          LabeledRadio(
+                            label: 'Mitra',
+                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                            value: false,
+                            groupValue: _isRadioSelected,
+                            onChanged: (bool newValue) {
+                              setState(() {
+                                _isRadioSelected = newValue;
+                              });
+                            },
+                          ),
+                        ],
+                      ),  
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
