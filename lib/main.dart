@@ -1,4 +1,4 @@
-// import 'package:e_chasier/login-daftar/daftar-mitra-lengkap.dart';
+import 'package:e_chasier/login-daftar/daftarMitraLengkap/daftar-mitra-lengkap.dart';
 import 'package:e_chasier/login-daftar/loginn.dart';
 import 'package:flutter/material.dart';
 // part 'theme.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Color.fromARGB(0, 255, 255, 255))
       ),
-      home: WellcomePage(),
+      home: daftarMitraLengkap(),
       
     );
   }
